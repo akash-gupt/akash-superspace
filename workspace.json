@@ -104,6 +104,111 @@
           }
         }
       }
+    },
+    "react-routing-example": {
+      "root": "apps/react-routing-example",
+      "sourceRoot": "apps/react-routing-example/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/web:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/react-routing-example",
+            "index": "apps/react-routing-example/src/index.html",
+            "main": "apps/react-routing-example/src/main.tsx",
+            "polyfills": "apps/react-routing-example/src/polyfills.ts",
+            "tsConfig": "apps/react-routing-example/tsconfig.app.json",
+            "assets": [
+              "apps/react-routing-example/src/favicon.ico",
+              "apps/react-routing-example/src/assets"
+            ],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/react-routing-example/src/environments/environment.ts",
+                  "with": "apps/react-routing-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "react-routing-example:build",
+            "hmr": true
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "react-routing-example:build:production",
+              "hmr": false
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": [
+              "apps/react-routing-example/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/react-routing-example"],
+          "options": {
+            "jestConfig": "apps/react-routing-example/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "react-routing-example-e2e": {
+      "root": "apps/react-routing-example-e2e",
+      "sourceRoot": "apps/react-routing-example-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/react-routing-example-e2e/cypress.json",
+            "devServerTarget": "react-routing-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "react-routing-example:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/react-routing-example-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
     }
   },
   "cli": {
